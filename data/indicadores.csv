@@ -1,0 +1,16 @@
+# ARCHIVO: data/indicadores.csv
+# RESPONSABLE: Antulio | APOYO: Ale | REVISOR: Yael
+#
+# IMPORTANTE: las lineas que empiezan con "#" son solo comentarios para el equipo.
+# BORRARLAS antes de cargar el archivo en el mapa, para que la primera linea sea el encabezado de columnas.
+#
+# QUE DESARROLLAR
+# 1. Elegir entre los tres 2 o 3 indicadores (poblacion, pobreza, escolaridad, etc.) y 2 o 3 anios. Justificar la eleccion en docs/investigacion.md.
+# 2. Descargar los datos de fuentes oficiales (INEGI, CONEVAL, CONAPO) y anotar cada fuente en el README.
+# 3. Armar UNA sola tabla con una fila por estado, anio e indicador. Encabezado acordado:
+#      cve_ent, entidad, anio, indicador, valor, unidad
+# 4. La clave de entidad (cve_ent) va SIEMPRE como texto de dos digitos: 01, 02, ... 32 (cuidar que la hoja de calculo no borre el cero inicial).
+# 5. Verificar que estan los 32 estados para cada combinacion de indicador y anio. Si falta un valor, dejarlo vacio y anotarlo en el README.
+# 6. Punto como separador decimal y sin simbolos (%, $) dentro del valor; la unidad va en su columna.
+#
+# LISTO CUANDO: Yael comprueba que hay 32 estados por indicador y anio y que las claves coinciden con data/estados.geojson.

@@ -1,0 +1,20 @@
+/*
+ARCHIVO:      css/controles.css
+RESPONSABLE:  Antulio
+APOYO:        Ale
+REVISOR:      Yael
+
+QUÉ DESARROLLAR
+1. Estilo de la leyenda: cuadros de color con sus rangos, título del indicador,
+   unidad y año, con fondo semitransparente para no tapar el mapa.
+2. Estilo de los selectores de indicador y de año.
+3. Estilo del interruptor para encender y apagar la capa de puntos.
+4. Estilo del estado "sin dato" en la leyenda.
+5. Que los controles sean fáciles de usar con el dedo en celular.
+
+REGLAS
+- Los colores de la leyenda los define js/coropleta.js; aquí solo se da formato.
+
+LISTO CUANDO
+- Leyenda y controles se ven claros, no se encimen con el panel ni con el mapa.
+*/

@@ -1,0 +1,21 @@
+/*
+ARCHIVO:      css/base.css
+RESPONSABLE:  Ale
+APOYO:        Yael
+REVISOR:      Antulio
+
+QUÉ DESARROLLAR
+1. Diseño general de la página: el mapa ocupa casi toda la pantalla y el panel
+   queda a un lado (en celular, debajo o encima del mapa).
+2. Tipografía, márgenes y colores generales de la página.
+3. Estilo del pie de página con las atribuciones.
+4. Reglas para pantallas pequeñas (celular y tableta).
+5. Estilo del tooltip (fondo, tamaño de letra, margen).
+
+REGLAS
+- Los colores del mapa NO se definen aquí: vienen de js/coropleta.js.
+- Usar nombres de clase que coincidan con los de index.html.
+
+LISTO CUANDO
+- La página se ve ordenada y legible en computadora y celular.
+*/

@@ -1,0 +1,18 @@
+{
+  "_comentario": "PLACEHOLDER. Reemplazar TODO este contenido por la capa real de puntos.",
+  "_archivo": "data/puntos.geojson",
+  "_responsable": "Ale",
+  "_apoyo": "Yael",
+  "_revisor": "Antulio",
+  "_que_desarrollar": [
+    "1. Elegir la categoria entre los tres (universidades u hospitales) y justificarla en docs/investigacion.md.",
+    "2. Conseguir una fuente oficial (por ejemplo ANUIES o DENUE para universidades; CLUES para hospitales) y anotarla en el README.",
+    "3. Convertir la tabla a puntos con latitud y longitud. Cada punto lleva al menos: nombre, tipo, entidad (clave de dos digitos) y municipio.",
+    "4. Limpiar: quitar duplicados y puntos sin coordenadas; revisar que todas las coordenadas caigan dentro de Mexico.",
+    "5. Cuidar el tamano: si hay demasiados puntos, filtrar por tipo o tomar una muestra razonable y anotarlo en el README.",
+    "6. Verificar que la entidad de cada punto coincida con el estado donde realmente cae."
+  ],
+  "_listo_cuando": "Antulio confirma que todos los puntos aparecen dentro de Mexico y que los datos del popup son correctos.",
+  "type": "FeatureCollection",
+  "features": []
+}

@@ -1,0 +1,18 @@
+{
+  "_comentario": "PLACEHOLDER. Reemplazar TODO este contenido por el GeoJSON real de las 32 entidades.",
+  "_archivo": "data/estados.geojson",
+  "_responsable": "Yael",
+  "_apoyo": "Antulio",
+  "_revisor": "Ale",
+  "_que_desarrollar": [
+    "1. Descargar el GeoJSON de entidades federativas (INEGI, Marco Geoestadistico, u otra fuente oficial) y anotar la fuente en el README.",
+    "2. Verificar que trae las 32 entidades y que cada una tiene clave de entidad (dos digitos, como texto) y nombre.",
+    "3. Verificar que esta en coordenadas geograficas (latitud/longitud, WGS84). Si no, reproyectarlo.",
+    "4. Simplificar la geometria (por ejemplo con mapshaper.org) sin deformar visiblemente los estados. Meta: menos de 1 MB.",
+    "5. Dejar solo las propiedades necesarias (clave y nombre).",
+    "6. Revisar que no falte ninguna entidad y que no haya geometrias rotas."
+  ],
+  "_listo_cuando": "Ale confirma que se ve completo y que la clave coincide con la de indicadores.csv.",
+  "type": "FeatureCollection",
+  "features": []
+}

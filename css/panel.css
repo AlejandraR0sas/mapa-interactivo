@@ -1,0 +1,17 @@
+/*
+ARCHIVO:      css/panel.css
+RESPONSABLE:  Yael
+APOYO:        Antulio
+REVISOR:      Ale
+
+QUÉ DESARROLLAR
+1. Estilo del panel de detalle: encabezado con el nombre del estado, lista de
+   indicadores, valores destacados, botón de cerrar.
+2. Estado "vacío" del panel (antes de hacer clic en un estado): mensaje de ayuda.
+3. Estilo de la evolución por año (lista o gráfica sencilla) dentro del panel.
+4. Comportamiento en celular: el panel debe abrirse sin tapar todo el mapa.
+5. Buen contraste y tamaño de letra legible.
+
+LISTO CUANDO
+- El panel se ve bien con y sin estado seleccionado, en computadora y celular.
+*/
