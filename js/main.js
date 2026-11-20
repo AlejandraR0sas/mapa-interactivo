@@ -1,25 +1,49 @@
-/*
-ARCHIVO:      js/main.js
-RESPONSABLE:  Ale
-APOYO:        Yael
-REVISOR:      Antulio
+let mapa;
+const estado = { indicador: null, anio: null, cveSeleccionada: null };
 
-QUÉ DESARROLLAR
-Este archivo solo "dirige la orquesta": no contiene la lógica de cada pieza.
-1. Definir el ESTADO de la aplicación: indicador activo, año activo, estado (entidad)
-   seleccionado y si la capa de puntos está visible.
-2. Llamar en orden a las piezas: mapa.js (crear el mapa), datos.js (cargar y unir),
-   coropleta.js (pintar y leyenda), interaccion.js (tooltip y clic), panel.js (detalle),
-   selectores.js (indicador y año) y puntos.js (capa de puntos).
-3. Cuando cambie el indicador, el año o el estado seleccionado, avisar a las piezas
-   que deban actualizarse, SIN recargar la página.
-4. Manejar errores: si un archivo no carga, mostrar un mensaje claro en la página.
+function mostrarError(mensaje) {
+  const aviso = document.createElement('div');
+  aviso.textContent = mensaje;
+  aviso.style.cssText =
+    'position:fixed;top:10px;left:50%;transform:translateX(-50%);' +
+    'background:#b00020;color:#fff;padding:10px 16px;border-radius:6px;z-index:2000;';
+  document.body.appendChild(aviso);
+}
 
-REGLAS
-- Acordar con Yael y Antulio los NOMBRES de las funciones que ofrece cada archivo
-  antes de escribirlos (anotarlos en el README, sección de estructura).
-- Ningún cálculo de colores ni de datos vive aquí.
+function alCambiarSeleccion() {
+  actualizarCoropleta(estado);
+  if (estado.cveSeleccionada) actualizarPanel(estado);
+}
 
-LISTO CUANDO
-- Todas las piezas se conectan y cambiar de indicador actualiza todo el mapa.
-*/
+function alSeleccionarEstado(cve) {
+  estado.cveSeleccionada = cve;
+  mostrarPanel(estado);
+}
+
+async function iniciar() {
+  try {
+    mapa = crearMapa('mapa');
+
+    const estados = await cargarDatos();
+    estado.indicador = obtenerIndicadores()[0];
+    const anios = obtenerAnios(estado.indicador);
+    estado.anio = anios[anios.length - 1];   // el año más reciente
+
+    const capaEstados = crearCoropleta(mapa, estados, estado);
+
+    activarInteraccion(capaEstados, estado, alSeleccionarEstado);
+
+    crearSelectores(estado, {
+      alCambiar: alCambiarSeleccion,
+      alAlternarPuntos: () => alternarPuntos(mapa)
+    });
+
+    await cargarPuntos(mapa);
+
+  } catch (error) {
+    console.error(error);
+    mostrarError('Error al cargar el mapa: ' + error.message);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', iniciar);
