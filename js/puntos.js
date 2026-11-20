@@ -1,23 +1,67 @@
-/*
-ARCHIVO:      js/puntos.js
-RESPONSABLE:  Ale
-APOYO:        Yael
-REVISOR:      Antulio
+let capaPuntos = null;
 
-QUÉ DESARROLLAR
-1. Cargar los puntos desde data/puntos.geojson.
-2. Crear la capa de marcadores con AGRUPAMIENTO: al alejar el zoom se agrupan en
-   círculos con el número de puntos, y al acercar se separan.
-3. Definir el aspecto del marcador y del grupo para que se distingan de los
-   colores de los estados.
-4. POPUP al hacer clic en un punto: nombre y datos básicos (tipo, entidad, municipio).
-5. Ofrecer una forma de ENCENDER Y APAGAR la capa (la usa selectores.js).
-6. Verificar rendimiento: el mapa debe seguir fluido con todos los puntos y la coropleta activa.
+// Evita que un texto de los datos se interprete como HTML dentro del popup
+function escaparHTML(texto) {
+  const div = document.createElement('div');
+  div.textContent = texto || '';
+  return div.innerHTML;
+}
 
-REGLAS
-- Los puntos van ENCIMA de los estados sin impedir hacer clic en ellos.
-- Si hay datos raros, se corrigen en data/puntos.geojson, no aquí.
+// Carga los puntos, los agrupa y los agrega al mapa
+async function cargarPuntos(mapa) {
+  const respuesta = await fetch('data/puntos.geojson');
+  if (!respuesta.ok) {
+    throw new Error('No se pudo cargar data/puntos.geojson');
+  }
+  const datos = await respuesta.json();
 
-LISTO CUANDO
-- Los grupos se forman y separan al hacer zoom y los popups muestran datos correctos.
-*/
+  // Nivel propio, por encima de los estados (400) y por debajo de los grupos (600)
+  if (!mapa.getPane('puntos')) {
+    mapa.createPane('puntos');
+    mapa.getPane('puntos').style.zIndex = 450;
+  }
+
+  capaPuntos = L.markerClusterGroup({
+    chunkedLoading: true,        // carga por tandas
+    showCoverageOnHover: false,  // sin el polígono que aparece al pasar sobre un grupo
+    maxClusterRadius: 50         // qué tan cerca deben estar para agruparse (píxeles)
+  });
+
+  const puntos = L.geoJSON(datos, {
+    pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
+      pane: 'puntos',
+      radius: 6,
+      color: '#ffffff',
+      weight: 1,
+      fillColor: '#6a3d9a',
+      fillOpacity: 0.9
+    }),
+    onEachFeature: (feature, layer) => {
+      const p = feature.properties;
+      layer.bindPopup(
+        '<strong>' + escaparHTML(p.nombre) + '</strong><br>' +
+        escaparHTML(p.tipo) + '<br>' +
+        escaparHTML(p.municipio) + ', ' + escaparHTML(p.entidad)
+      );
+    }
+  });
+
+  capaPuntos.addLayer(puntos);
+  capaPuntos.addTo(mapa);
+  return capaPuntos;
+}
+
+// Para el interruptor que hace Antulio en selectores.js
+function mostrarPuntos(mapa) {
+  if (capaPuntos && !mapa.hasLayer(capaPuntos)) capaPuntos.addTo(mapa);
+}
+
+function ocultarPuntos(mapa) {
+  if (capaPuntos && mapa.hasLayer(capaPuntos)) mapa.removeLayer(capaPuntos);
+}
+
+function alternarPuntos(mapa) {
+  if (!capaPuntos) return;
+  if (mapa.hasLayer(capaPuntos)) ocultarPuntos(mapa);
+  else mostrarPuntos(mapa);
+}
