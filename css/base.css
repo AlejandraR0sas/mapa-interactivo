@@ -1,24 +1,106 @@
-/*
-ARCHIVO:      css/base.css
-RESPONSABLE:  Ale
-APOYO:        Yael
-REVISOR:      Antulio
+:root {
+  --color-encabezado: #1f2a44;
+  --color-texto: #1d1d1f;
+  --color-fondo: #f4f5f7;
+  --color-superficie: #ffffff;
+  --color-borde: #d9dce1;
+  --ancho-panel: 320px;
+  --alto-encabezado: 56px;
+}
 
-QUÉ DESARROLLAR
-1. Diseño general de la página: el mapa ocupa casi toda la pantalla y el panel
-   queda a un lado (en celular, debajo o encima del mapa).
-2. Tipografía, márgenes y colores generales de la página.
-3. Estilo del pie de página con las atribuciones.
-4. Reglas para pantallas pequeñas (celular y tableta).
-5. Estilo del tooltip (fondo, tamaño de letra, margen).
+* { box-sizing: border-box; }
 
-REGLAS
-- Los colores del mapa NO se definen aquí: vienen de js/coropleta.js.
-- Usar nombres de clase que coincidan con los de index.html.
+html, body { height: 100%; }
 
-LISTO CUANDO
-- La página se ve ordenada y legible en computadora y celular.
-*/
+/* La página es una columna: encabezado, contenido (crece) y pie */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--color-texto);
+  background: var(--color-fondo);
+}
+
+.encabezado {
+  flex: 0 0 var(--alto-encabezado);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: var(--color-encabezado);
+  color: #ffffff;
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Mapa a la izquierda, panel a la derecha */
+.contenido {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr var(--ancho-panel);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+#mapa {
+  height: 100%;
+  min-height: 0;
+}
+
+/* Aquí solo se coloca el panel; su interior lo estiliza panel.css */
+#panel {
+  overflow-y: auto;
+  background: var(--color-superficie);
+  border-left: 1px solid var(--color-borde);
+}
+
+.pie {
+  flex: 0 0 auto;
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  color: #555555;
+  background: var(--color-superficie);
+  border-top: 1px solid var(--color-borde);
+}
+
+/* Mapa base en gris (lo usa mapa.js con className: 'base-gris') */
 .base-gris {
   filter: grayscale(100%) brightness(1.08) contrast(0.9);
+}
+
+/* Tooltip al pasar el mouse sobre un estado */
+.leaflet-tooltip {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  color: var(--color-texto);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+}
+
+/* Accesibilidad: se ve qué elemento tiene el foco con el teclado */
+:focus-visible {
+  outline: 3px solid #2b6cb0;
+  outline-offset: 2px;
+}
+
+/* Celular y tableta: el panel pasa abajo */
+@media (max-width: 768px) {
+  .contenido {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) 35vh;
+  }
+
+  #panel {
+    border-left: 0;
+    border-top: 1px solid var(--color-borde);
+  }
+
+  .encabezado h1 { font-size: 1rem; }
 }
