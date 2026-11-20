@@ -19,3 +19,6 @@ REGLAS
 LISTO CUANDO
 - La página se ve ordenada y legible en computadora y celular.
 */
+.base-gris {
+  filter: grayscale(100%) brightness(1.08) contrast(0.9);
+}

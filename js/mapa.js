@@ -1,23 +1,33 @@
-/*
-ARCHIVO:      js/mapa.js
-RESPONSABLE:  Ale
-APOYO:        Yael
-REVISOR:      Antulio
+function crearMapa(idContenedor) {
 
-QUÉ DESARROLLAR
-1. Crear el mapa con su centro y nivel de zoom iniciales (que se vea todo México)
-   y los límites de zoom razonables.
-2. Agregar al menos DOS capas base (por ejemplo una estándar y una clara y sobria)
-   con la atribución de cada proveedor.
-3. Agregar el control para cambiar entre capas base.
-4. Elegir la capa base por defecto: debe ser discreta para que no compita con
-   los colores de la coropleta.
-5. Ofrecer al resto del equipo una forma de obtener el mapa creado
-   (lo usan coropleta.js, interaccion.js y puntos.js).
+  const mapa = L.map(idContenedor, {
+    center: [23.6, -102.5],
+    zoom: 5,
+    minZoom: 4,
+    maxZoom: 12
+  });
 
-REGLAS
-- Documentar en docs/investigacion.md por qué se eligieron esas capas base.
+  const atribucionOSM = '&copy; OpenStreetMap contributors';
 
-LISTO CUANDO
-- El mapa se ve completo, se puede cambiar de capa base y la atribución aparece.
-*/
+  // Capa 1: OpenStreetMap en gris (el filtro está en css/base.css)
+  const gris = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: atribucionOSM,
+    maxZoom: 19,
+    className: 'base-gris'
+  });
+
+  // Capa 2: OpenStreetMap a color, con más detalle de calles
+  const calles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: atribucionOSM,
+    maxZoom: 19
+  });
+
+  gris.addTo(mapa);
+
+  L.control.layers({
+    'Gris (OpenStreetMap)': gris,
+    'Calles (OpenStreetMap)': calles
+  }).addTo(mapa);
+
+  return mapa;
+}
