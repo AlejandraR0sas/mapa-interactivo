@@ -1,17 +1,8 @@
-<!--
-BASE DEL README: completen cada sección y borren este comentario al terminar.
-Quién llena qué (entre paréntesis en cada sección):
-  Ale:     descripción, tecnologías, capas base y puntos
-  Yael:    estructura, convenciones de datos, GeoJSON, cómo correrlo
-  Antulio: indicadores, cómo usar el mapa, publicación, limitaciones
-Los hallazgos van en el PDF aparte, no aquí.
--->
-
 # Mapa interactivo de México: población por entidad federativa
  
 Mapa interactivo de las 32 entidades federativas de México que combina un indicador por estado (población, representada con colores) con la ubicación de 8,305 establecimientos de educación superior, para explorar patrones regionales.
  
-**Mapa publicado:** [enlace de GitHub Pages]
+**Publicación:** el proyecto está listo para servirse como sitio estático; falta definir el repositorio/rama de GitHub Pages y publicar.
 
 ---
 
@@ -33,7 +24,7 @@ Mapa interactivo de las 32 entidades federativas de México que combina un indic
 ## Indicadores y años *(Antulio)*
 | Indicador | Unidad | Años | Fuente |
 |---|---|---|---|
-| Población total | Habitantes | [2010, 2015, 2020: confirmar] | INEGI, [Censo de Población y Vivienda / Encuesta Intercensal: confirmar] |
+| Población total, de hombres y de mujeres | Personas | 2010, 2020 | INEGI, Censos de Población y Vivienda 2010 y 2020 |
 
 ## Tecnologías
 - **Librería de mapas:** Leaflet 1.9.4
@@ -55,7 +46,7 @@ docs/               investigacion.md
 |---|---|
 | `mapa.js` | `crearMapa(idContenedor)` |
 | `puntos.js` | `cargarPuntos(mapa)`, `mostrarPuntos(mapa)`, `ocultarPuntos(mapa)`, `alternarPuntos(mapa)` |
-| `datos.js` | `cargarDatos()`, `obtenerIndicadores()`, `obtenerAnios(indicador)` |
+| `datos.js` | `cargarDatos()`, `obtenerIndicadores()`, `obtenerAnios(indicador)`, `obtenerRegistro(clave, indicador, anio)`, `obtenerValor(clave, indicador, anio)`, `obtenerRango(indicador, anio)`, `obtenerDatosEstado(clave)` |
 | `coropleta.js` | `crearCoropleta(mapa, estados, estado)`, `actualizarCoropleta(estado)` |
 | `interaccion.js` | `activarInteraccion(capaEstados, estado, alSeleccionar)` |
 | `panel.js` | `mostrarPanel(estado)`, `actualizarPanel(estado)`, `cerrarPanel()` |
@@ -65,15 +56,15 @@ docs/               investigacion.md
 ## Convenciones de datos
 - Clave de entidad: texto de dos dígitos (`"01"` a `"32"`).
 - Columnas de `indicadores.csv`: `cve_ent, entidad, anio, indicador, valor, unidad`
-- Propiedades del GeoJSON de estados: [por definir]
+- Propiedades mínimas del GeoJSON de estados: `cve_ent` (texto de dos dígitos), `entidad` (nombre) y `indicadores` (lista agregada al cargar). Se aceptan `nom_ent`/`NOMGEO` como nombre y `CVE_ENT`/`CVEGEO` como clave de origen.
 - Propiedades del GeoJSON de puntos: `nombre`, `tipo`, `cve_ent`, `entidad`, `municipio`
 
 
 ## Fuentes de datos
 | Archivo | Fuente | Enlace | Fecha de descarga | Transformaciones |
 |---|---|---|---|---|
-| estados.geojson | [ ] | [ ] | [ ] | [simplificado, reproyectado, etc.] |
-| indicadores.csv | [ ] | [ ] | [ ] | [ ] |
+| estados.geojson | INEGI, Marco Geoestadístico, AGEE 2025 | https://www.inegi.org.mx/servicios/catalogounico.html | Descargado el 22/11/2026 | 32 geometrías estatales; propiedades reducidas a clave y nombre; simplificado topológicamente con Mapshaper; coordenadas geográficas para Leaflet; archivo de 1.65 MB. |
+| indicadores.csv | INEGI, Censo de Población y Vivienda 2010 y 2020 | https://inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/889463904847.pdf | Consultado el 22/11/2026 | Población total, de hombres y de mujeres; 32 claves por indicador y año; sin separadores de miles y con unidad en columna aparte. |
 | puntos.geojson | INEGI, DENUE (sector 61, Servicios educativos), datos de 05/2026 | https://www.inegi.org.mx/app/descarga/?ti=6 | 19/11/2026 | Filtrado por actividad SCIAN 6113 (educación superior): de 150,571 registros se conservaron 8,305; 53 duplicados eliminados; ninguno sin coordenadas ni fuera de México; convertido a GeoJSON con un script de Python |
  
 ## Cómo correrlo localmente
@@ -82,6 +73,8 @@ Abrir `index.html` con doble clic puede fallar, porque el navegador bloquea la c
 - **VS Code:** instalar la extensión *Live Server* y pulsar "Go Live".
 - **Python:** ejecutar `python -m http.server 8000` y abrir `http://localhost:8000`.
 
-## Publicación en GitHub Pages *(Antulio)*
-[Repositorio, rama usada, carpeta, y los pasos que se siguieron. Recordar que todas las rutas deben ser relativas.]
+`data/estados.geojson` contiene un `FeatureCollection` de 32 entidades con geometrías Polygon/MultiPolygon y clave `cve_ent`; `data/indicadores.csv` contiene una fila por entidad, indicador y año. El cargador valida encabezados y tipos, une por `cve_ent` y avisa en consola si detecta claves sin correspondencia.
+
+## Publicación en GitHub Pages
+Repositorio: https://github.com/AlejandraR0sas/mapa-interactivo (rama `main`, archivos en la raíz). Para publicarlo, abre **Settings → Pages**, selecciona **Deploy from a branch**, elige `main` y la carpeta `/ (root)`, y guarda. GitHub mostrará la URL pública cuando termine el primer despliegue. La publicación todavía no se ha activado desde este entorno.
 

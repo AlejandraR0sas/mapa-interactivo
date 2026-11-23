@@ -1,20 +1,57 @@
-/*
-ARCHIVO:      css/controles.css
-RESPONSABLE:  Antulio
-APOYO:        Ale
-REVISOR:      Yael
-
-QUÉ DESARROLLAR
-1. Estilo de la leyenda: cuadros de color con sus rangos, título del indicador,
-   unidad y año, con fondo semitransparente para no tapar el mapa.
-2. Estilo de los selectores de indicador y de año.
-3. Estilo del interruptor para encender y apagar la capa de puntos.
-4. Estilo del estado "sin dato" en la leyenda.
-5. Que los controles sean fáciles de usar con el dedo en celular.
-
-REGLAS
-- Los colores de la leyenda los define js/coropleta.js; aquí solo se da formato.
-
-LISTO CUANDO
-- Leyenda y controles se ven claros, no se encimen con el panel ni con el mapa.
-*/
+.controles {
+  position:absolute;
+  z-index:700;
+  top:12px;
+  left:54px;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  max-width:calc(100% - 72px);
+  padding:10px 12px;
+  border:1px solid rgba(28,42,62,.18);
+  border-radius:10px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 2px 10px rgba(18,32,52,.16);
+}
+.controles label { font-size:.85rem; font-weight:600; }
+.controles select {
+  min-height:38px;
+  max-width:180px;
+  padding:6px 28px 6px 9px;
+  border:1px solid #aeb8c6;
+  border-radius:6px;
+  background:#fff;
+  color:#1d1d1f;
+  font:inherit;
+}
+.control-puntos { display:flex; align-items:center; gap:7px; font-weight:500!important; }
+.control-puntos input { width:18px; height:18px; accent-color:#285b8f; }
+.leyenda {
+  position:absolute;
+  z-index:650;
+  bottom:18px;
+  left:12px;
+  min-width:190px;
+  max-width:min(280px,calc(100% - 24px));
+  padding:12px 14px;
+  border:1px solid rgba(28,42,62,.18);
+  border-radius:9px;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 2px 10px rgba(18,32,52,.14);
+  font-size:.82rem;
+}
+.leyenda h2 { margin:0; font-size:.9rem; }
+.leyenda p { margin:3px 0 8px; color:#5b6472; }
+.leyenda ul { display:grid; gap:4px; margin:0; padding:0; list-style:none; }
+.leyenda li { display:flex; align-items:center; gap:8px; }
+.leyenda-muestra { display:inline-block; flex:0 0 18px; width:18px; height:14px; border:1px solid rgba(20,35,55,.24); }
+.leyenda-muestra.sin-dato { background:#a7adb5; }
+.tooltip-entidad { font:inherit; }
+@media (max-width:768px) {
+  .controles { top:8px; left:48px; gap:6px; padding:8px; }
+  .controles select { max-width:135px; }
+  .controles label { font-size:.78rem; }
+  .control-puntos { flex-basis:100%; }
+  .leyenda { bottom:10px; left:10px; padding:9px 11px; }
+}

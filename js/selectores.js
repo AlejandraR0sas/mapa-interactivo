@@ -1,21 +1,38 @@
-/*
-ARCHIVO:      js/selectores.js
-RESPONSABLE:  Antulio
-APOYO:        Yael
-REVISOR:      Ale
+function crearSelectores(estado, { alCambiar = () => {}, alAlternarPuntos = () => {} } = {}) {
+  const selectorIndicador = document.getElementById('indicador');
+  const selectorAnio = document.getElementById('anio');
+  const interruptorPuntos = document.getElementById('mostrar-puntos');
+  if (!selectorIndicador || !selectorAnio) return;
 
-QUÉ DESARROLLAR
-1. Selector de INDICADOR: llenar las opciones a partir de los datos (no escribirlas a mano).
-2. Selector de AÑO: llenar las opciones a partir de los datos; deshabilitar combinaciones
-   que no existan.
-3. Interruptor para ENCENDER Y APAGAR la capa de puntos (usa lo que ofrece puntos.js).
-4. Avisar a main.js cuando cambie cualquier selección.
-5. Valores iniciales razonables (primer indicador y año más reciente).
+  const indicadores = obtenerIndicadores();
+  selectorIndicador.replaceChildren(...indicadores.map((indicador) => new Option(indicador, indicador)));
+  if (!indicadores.length) {
+    selectorIndicador.add(new Option('Sin indicadores disponibles', ''));
+    selectorIndicador.disabled = true;
+    selectorAnio.add(new Option('Sin años disponibles', ''));
+    selectorAnio.disabled = true;
+    return;
+  }
 
-REGLAS
-- Las listas de indicadores y años se piden a datos.js.
-- El diseño vive en css/controles.css.
+  selectorIndicador.value = estado.indicador || indicadores[0];
+  const llenarAnios = (anioPreferido) => {
+    const anios = obtenerAnios(estado.indicador);
+    selectorAnio.replaceChildren(...anios.map((anio) => new Option(String(anio), String(anio))));
+    selectorAnio.disabled = !anios.length;
+    if (!anios.length) { estado.anio = null; return; }
+    estado.anio = anios.includes(Number(anioPreferido)) ? Number(anioPreferido) : anios[anios.length - 1];
+    selectorAnio.value = String(estado.anio);
+  };
+  llenarAnios(estado.anio);
 
-LISTO CUANDO
-- Cambiar indicador o año actualiza colores, leyenda y panel sin recargar la página.
-*/
+  selectorIndicador.addEventListener('change', () => {
+    estado.indicador = selectorIndicador.value;
+    llenarAnios(estado.anio);
+    alCambiar(estado);
+  });
+  selectorAnio.addEventListener('change', () => {
+    estado.anio = Number(selectorAnio.value);
+    alCambiar(estado);
+  });
+  interruptorPuntos?.addEventListener('change', () => alAlternarPuntos(interruptorPuntos.checked));
+}

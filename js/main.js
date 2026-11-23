@@ -25,6 +25,7 @@ async function iniciar() {
     mapa = crearMapa('mapa');
 
     const estados = await cargarDatos();
+    mostrarPanel(estado);
     estado.indicador = obtenerIndicadores()[0];
     const anios = obtenerAnios(estado.indicador);
     estado.anio = anios[anios.length - 1];   // el año más reciente
@@ -33,12 +34,12 @@ async function iniciar() {
 
     activarInteraccion(capaEstados, estado, alSeleccionarEstado);
 
+    await cargarPuntos(mapa);
+
     crearSelectores(estado, {
       alCambiar: alCambiarSeleccion,
-      alAlternarPuntos: () => alternarPuntos(mapa)
+      alAlternarPuntos: (visible) => visible ? mostrarPuntos(mapa) : ocultarPuntos(mapa)
     });
-
-    await cargarPuntos(mapa);
 
   } catch (error) {
     console.error(error);
