@@ -1,25 +1,41 @@
-<!--
-ARCHIVO:      index.html
-RESPONSABLE:  Yael
-APOYO:        Antulio
-REVISOR:      Ale
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mapa interactivo de indicadores por entidad federativa y establecimientos de educación superior en México.">
+  <title>Mapa interactivo de México</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/controles.css">
+  <link rel="stylesheet" href="css/panel.css">
+</head>
+<body>
+  <header class="encabezado"><h1>Indicadores de México por entidad federativa</h1></header>
+  <main class="contenido">
+    <section class="zona-mapa" aria-label="Mapa y controles">
+      <div id="controles" class="controles" aria-label="Controles del mapa">
+        <label for="indicador">Indicador</label><select id="indicador" name="indicador"></select>
+        <label for="anio">Año</label><select id="anio" name="anio"></select>
+        <label class="control-puntos"><input id="mostrar-puntos" type="checkbox" checked> Establecimientos de educación superior</label>
+      </div>
+      <div id="mapa" role="application" aria-label="Mapa interactivo de México"></div>
+    </section>
+    <aside id="panel" aria-label="Detalle de la entidad"></aside>
+  </main>
+  <footer class="pie">Mapas base © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Geometrías estatales: INEGI. Establecimientos: INEGI, DENUE.</footer>
 
-QUÉ DESARROLLAR
-1. Estructura de la página: título, contenedor del mapa (casi pantalla completa),
-   panel lateral para el detalle del estado y zona de controles (selector de indicador,
-   selector de año, interruptor de la capa de puntos).
-2. Enlaces a las librerías externas (mapas, agrupamiento de marcadores, escalas de color)
-   y a los archivos de css/ y js/. Orden de los scripts: librerías, datos.js, mapa.js,
-   coropleta.js, interaccion.js, panel.js, selectores.js, puntos.js y al final main.js.
-3. Pie con la atribución obligatoria de los mapas base y de las fuentes de datos.
-4. Idioma español, codificación UTF-8 y vista adaptable a celular.
-5. Los nombres (id/clase) de cada contenedor deben acordarse con quien los usa:
-   mapa -> Ale, panel -> Yael, controles y leyenda -> Antulio.
-
-REGLAS
-- Todas las rutas son RELATIVAS (sin "/" al inicio) para que funcionen en GitHub Pages.
-- Aquí no va lógica del mapa.
-
-LISTO CUANDO
-- Abre sin errores en la consola y se ve bien en computadora y celular.
--->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/mapa.js"></script>
+  <script src="js/coropleta.js"></script>
+  <script src="js/interaccion.js"></script>
+  <script src="js/panel.js"></script>
+  <script src="js/selectores.js"></script>
+  <script src="js/puntos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

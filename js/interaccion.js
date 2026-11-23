@@ -1,23 +1,36 @@
-/*
-ARCHIVO:      js/interaccion.js
-RESPONSABLE:  Antulio
-APOYO:        Ale
-REVISOR:      Yael
+function activarInteraccion(capaEstados, estado, alSeleccionar) {
+  capaEstados.eachLayer((capa) => {
+    const feature = capa.feature;
+    const propiedades = feature.properties;
+    const clave = propiedades.cve_ent;
+    const nombre = propiedades.entidad || `Entidad ${clave}`;
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip-entidad';
+    capa.bindTooltip(tooltip, { sticky: true, direction: 'auto' });
 
-QUÉ DESARROLLAR
-1. TOOLTIP al pasar el mouse: nombre del estado y valor del indicador activo
-   (con unidad y año).
-2. RESALTADO del estado bajo el cursor y quitarlo al salir.
-3. CLIC en un estado: marcarlo como seleccionado y avisar a main.js / panel.js
-   para que se abra el detalle.
-4. Mantener marcado el estado seleccionado mientras el panel esté abierto.
-5. En celular, el toque debe sustituir al paso del mouse (mostrar el tooltip al tocar).
-6. Probar combinaciones: hacer clic en un estado sin dato, cambiar de indicador con
-   un estado seleccionado, hacer clic en un punto de la capa de puntos, etc.
+    const actualizarTooltip = () => {
+      const valor = obtenerValor(clave, estado.indicador, estado.anio);
+      const unidad = obtenerRegistro(clave, estado.indicador, estado.anio)?.unidad || '';
+      tooltip.textContent = `${nombre}: ${valor === null ? 'Sin dato' : `${formatearNumero(valor)} ${unidad}`}${estado.anio ? ` (${estado.anio})` : ''}`;
+    };
 
-REGLAS
-- Los datos se piden a datos.js y los colores a coropleta.js.
-
-LISTO CUANDO
-- Tooltip, resaltado y selección funcionan juntos y no se rompen al combinarlos.
-*/
+    capa.on({
+      mouseover: (evento) => {
+        actualizarTooltip();
+        if (clave !== estado.cveSeleccionada) evento.target.setStyle({ color: '#152238', weight: 2, fillOpacity: 0.95 });
+        evento.target.openTooltip();
+      },
+      mouseout: (evento) => {
+        capaEstados.resetStyle(evento.target);
+        evento.target.closeTooltip();
+      },
+      click: () => {
+        actualizarTooltip();
+        capa.openTooltip();
+        estado.cveSeleccionada = clave;
+        actualizarCoropleta(estado);
+        if (typeof alSeleccionar === 'function') alSeleccionar(clave);
+      }
+    });
+  });
+}

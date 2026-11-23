@@ -53,6 +53,8 @@ body {
   min-height: 0;
 }
 
+.zona-mapa { position: relative; min-width: 0; min-height: 0; }
+
 /* Aquí solo se coloca el panel; su interior lo estiliza panel.css */
 #panel {
   overflow-y: auto;
@@ -96,6 +98,8 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: minmax(0, 1fr) 35vh;
   }
+
+  .zona-mapa { min-height: 0; }
 
   #panel {
     border-left: 0;

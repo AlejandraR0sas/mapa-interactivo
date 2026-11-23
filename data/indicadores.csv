@@ -1,16 +1,193 @@
-# ARCHIVO: data/indicadores.csv
-# RESPONSABLE: Antulio | APOYO: Ale | REVISOR: Yael
-#
-# IMPORTANTE: las lineas que empiezan con "#" son solo comentarios para el equipo.
-# BORRARLAS antes de cargar el archivo en el mapa, para que la primera linea sea el encabezado de columnas.
-#
-# QUE DESARROLLAR
-# 1. Elegir entre los tres 2 o 3 indicadores (poblacion, pobreza, escolaridad, etc.) y 2 o 3 anios. Justificar la eleccion en docs/investigacion.md.
-# 2. Descargar los datos de fuentes oficiales (INEGI, CONEVAL, CONAPO) y anotar cada fuente en el README.
-# 3. Armar UNA sola tabla con una fila por estado, anio e indicador. Encabezado acordado:
-#      cve_ent, entidad, anio, indicador, valor, unidad
-# 4. La clave de entidad (cve_ent) va SIEMPRE como texto de dos digitos: 01, 02, ... 32 (cuidar que la hoja de calculo no borre el cero inicial).
-# 5. Verificar que estan los 32 estados para cada combinacion de indicador y anio. Si falta un valor, dejarlo vacio y anotarlo en el README.
-# 6. Punto como separador decimal y sin simbolos (%, $) dentro del valor; la unidad va en su columna.
-#
-# LISTO CUANDO: Yael comprueba que hay 32 estados por indicador y anio y que las claves coinciden con data/estados.geojson.
+cve_ent,entidad,anio,indicador,valor,unidad
+01,Aguascalientes,2010,Población total,1184996,personas
+01,Aguascalientes,2010,Población de hombres,576638,personas
+01,Aguascalientes,2010,Población de mujeres,608358,personas
+01,Aguascalientes,2020,Población total,1425607,personas
+01,Aguascalientes,2020,Población de hombres,696683,personas
+01,Aguascalientes,2020,Población de mujeres,728924,personas
+02,Baja California,2010,Población total,3155070,personas
+02,Baja California,2010,Población de hombres,1591610,personas
+02,Baja California,2010,Población de mujeres,1563460,personas
+02,Baja California,2020,Población total,3769020,personas
+02,Baja California,2020,Población de hombres,1900589,personas
+02,Baja California,2020,Población de mujeres,1868431,personas
+03,Baja California Sur,2010,Población total,637026,personas
+03,Baja California Sur,2010,Población de hombres,325433,personas
+03,Baja California Sur,2010,Población de mujeres,311593,personas
+03,Baja California Sur,2020,Población total,798447,personas
+03,Baja California Sur,2020,Población de hombres,405879,personas
+03,Baja California Sur,2020,Población de mujeres,392568,personas
+04,Campeche,2010,Población total,822441,personas
+04,Campeche,2010,Población de hombres,407721,personas
+04,Campeche,2010,Población de mujeres,414720,personas
+04,Campeche,2020,Población total,928363,personas
+04,Campeche,2020,Población de hombres,456939,personas
+04,Campeche,2020,Población de mujeres,471424,personas
+05,Coahuila de Zaragoza,2010,Población total,2748391,personas
+05,Coahuila de Zaragoza,2010,Población de hombres,1364197,personas
+05,Coahuila de Zaragoza,2010,Población de mujeres,1384194,personas
+05,Coahuila de Zaragoza,2020,Población total,3146771,personas
+05,Coahuila de Zaragoza,2020,Población de hombres,1563669,personas
+05,Coahuila de Zaragoza,2020,Población de mujeres,1583102,personas
+06,Colima,2010,Población total,650555,personas
+06,Colima,2010,Población de hombres,322790,personas
+06,Colima,2010,Población de mujeres,327765,personas
+06,Colima,2020,Población total,731391,personas
+06,Colima,2020,Población de hombres,360622,personas
+06,Colima,2020,Población de mujeres,370769,personas
+07,Chiapas,2010,Población total,4796580,personas
+07,Chiapas,2010,Población de hombres,2352807,personas
+07,Chiapas,2010,Población de mujeres,2443773,personas
+07,Chiapas,2020,Población total,5543828,personas
+07,Chiapas,2020,Población de hombres,2705947,personas
+07,Chiapas,2020,Población de mujeres,2837881,personas
+08,Chihuahua,2010,Población total,3406465,personas
+08,Chihuahua,2010,Población de hombres,1692545,personas
+08,Chihuahua,2010,Población de mujeres,1713920,personas
+08,Chihuahua,2020,Población total,3741869,personas
+08,Chihuahua,2020,Población de hombres,1853822,personas
+08,Chihuahua,2020,Población de mujeres,1888047,personas
+09,Ciudad de México,2010,Población total,8851080,personas
+09,Ciudad de México,2010,Población de hombres,4233783,personas
+09,Ciudad de México,2010,Población de mujeres,4617297,personas
+09,Ciudad de México,2020,Población total,9209944,personas
+09,Ciudad de México,2020,Población de hombres,4404927,personas
+09,Ciudad de México,2020,Población de mujeres,4805017,personas
+10,Durango,2010,Población total,1632934,personas
+10,Durango,2010,Población de hombres,803890,personas
+10,Durango,2010,Población de mujeres,829044,personas
+10,Durango,2020,Población total,1832650,personas
+10,Durango,2020,Población de hombres,904866,personas
+10,Durango,2020,Población de mujeres,927784,personas
+11,Guanajuato,2010,Población total,5486372,personas
+11,Guanajuato,2010,Población de hombres,2639425,personas
+11,Guanajuato,2010,Población de mujeres,2846947,personas
+11,Guanajuato,2020,Población total,6166934,personas
+11,Guanajuato,2020,Población de hombres,2996454,personas
+11,Guanajuato,2020,Población de mujeres,3170480,personas
+12,Guerrero,2010,Población total,3388768,personas
+12,Guerrero,2010,Población de hombres,1645561,personas
+12,Guerrero,2010,Población de mujeres,1743207,personas
+12,Guerrero,2020,Población total,3540685,personas
+12,Guerrero,2020,Población de hombres,1700612,personas
+12,Guerrero,2020,Población de mujeres,1840073,personas
+13,Hidalgo,2010,Población total,2665018,personas
+13,Hidalgo,2010,Población de hombres,1285222,personas
+13,Hidalgo,2010,Población de mujeres,1379796,personas
+13,Hidalgo,2020,Población total,3082841,personas
+13,Hidalgo,2020,Población de hombres,1481379,personas
+13,Hidalgo,2020,Población de mujeres,1601462,personas
+14,Jalisco,2010,Población total,7350682,personas
+14,Jalisco,2010,Población de hombres,3600641,personas
+14,Jalisco,2010,Población de mujeres,3750041,personas
+14,Jalisco,2020,Población total,8348151,personas
+14,Jalisco,2020,Población de hombres,4098455,personas
+14,Jalisco,2020,Población de mujeres,4249696,personas
+15,México,2010,Población total,15175862,personas
+15,México,2010,Población de hombres,7396986,personas
+15,México,2010,Población de mujeres,7778876,personas
+15,México,2020,Población total,16992418,personas
+15,México,2020,Población de hombres,8251295,personas
+15,México,2020,Población de mujeres,8741123,personas
+16,Michoacán de Ocampo,2010,Población total,4351037,personas
+16,Michoacán de Ocampo,2010,Población de hombres,2102109,personas
+16,Michoacán de Ocampo,2010,Población de mujeres,2248928,personas
+16,Michoacán de Ocampo,2020,Población total,4748846,personas
+16,Michoacán de Ocampo,2020,Población de hombres,2306341,personas
+16,Michoacán de Ocampo,2020,Población de mujeres,2442505,personas
+17,Morelos,2010,Población total,1777227,personas
+17,Morelos,2010,Población de hombres,858588,personas
+17,Morelos,2010,Población de mujeres,918639,personas
+17,Morelos,2020,Población total,1971520,personas
+17,Morelos,2020,Población de hombres,950847,personas
+17,Morelos,2020,Población de mujeres,1020673,personas
+18,Nayarit,2010,Población total,1084979,personas
+18,Nayarit,2010,Población de hombres,541007,personas
+18,Nayarit,2010,Población de mujeres,543972,personas
+18,Nayarit,2020,Población total,1235456,personas
+18,Nayarit,2020,Población de hombres,612278,personas
+18,Nayarit,2020,Población de mujeres,623178,personas
+19,Nuevo León,2010,Población total,4653458,personas
+19,Nuevo León,2010,Población de hombres,2320185,personas
+19,Nuevo León,2010,Población de mujeres,2333273,personas
+19,Nuevo León,2020,Población total,5784442,personas
+19,Nuevo León,2020,Población de hombres,2890950,personas
+19,Nuevo León,2020,Población de mujeres,2893492,personas
+20,Oaxaca,2010,Población total,3801962,personas
+20,Oaxaca,2010,Población de hombres,1819008,personas
+20,Oaxaca,2010,Población de mujeres,1982954,personas
+20,Oaxaca,2020,Población total,4132148,personas
+20,Oaxaca,2020,Población de hombres,1974843,personas
+20,Oaxaca,2020,Población de mujeres,2157305,personas
+21,Puebla,2010,Población total,5779829,personas
+21,Puebla,2010,Población de hombres,2769855,personas
+21,Puebla,2010,Población de mujeres,3009974,personas
+21,Puebla,2020,Población total,6583278,personas
+21,Puebla,2020,Población de hombres,3160115,personas
+21,Puebla,2020,Población de mujeres,3423163,personas
+22,Querétaro,2010,Población total,1827937,personas
+22,Querétaro,2010,Población de hombres,887188,personas
+22,Querétaro,2010,Población de mujeres,940749,personas
+22,Querétaro,2020,Población total,2368467,personas
+22,Querétaro,2020,Población de hombres,1156820,personas
+22,Querétaro,2020,Población de mujeres,1211647,personas
+23,Quintana Roo,2010,Población total,1325578,personas
+23,Quintana Roo,2010,Población de hombres,673220,personas
+23,Quintana Roo,2010,Población de mujeres,652358,personas
+23,Quintana Roo,2020,Población total,1857985,personas
+23,Quintana Roo,2020,Población de hombres,936779,personas
+23,Quintana Roo,2020,Población de mujeres,921206,personas
+24,San Luis Potosí,2010,Población total,2585518,personas
+24,San Luis Potosí,2010,Población de hombres,1260366,personas
+24,San Luis Potosí,2010,Población de mujeres,1325152,personas
+24,San Luis Potosí,2020,Población total,2822255,personas
+24,San Luis Potosí,2020,Población de hombres,1372451,personas
+24,San Luis Potosí,2020,Población de mujeres,1449804,personas
+25,Sinaloa,2010,Población total,2767761,personas
+25,Sinaloa,2010,Población de hombres,1376201,personas
+25,Sinaloa,2010,Población de mujeres,1391560,personas
+25,Sinaloa,2020,Población total,3026943,personas
+25,Sinaloa,2020,Población de hombres,1494815,personas
+25,Sinaloa,2020,Población de mujeres,1532128,personas
+26,Sonora,2010,Población total,2662480,personas
+26,Sonora,2010,Población de hombres,1339612,personas
+26,Sonora,2010,Población de mujeres,1322868,personas
+26,Sonora,2020,Población total,2944840,personas
+26,Sonora,2020,Población de hombres,1472197,personas
+26,Sonora,2020,Población de mujeres,1472643,personas
+27,Tabasco,2010,Población total,2238603,personas
+27,Tabasco,2010,Población de hombres,1100758,personas
+27,Tabasco,2010,Población de mujeres,1137845,personas
+27,Tabasco,2020,Población total,2402598,personas
+27,Tabasco,2020,Población de hombres,1173671,personas
+27,Tabasco,2020,Población de mujeres,1228927,personas
+28,Tamaulipas,2010,Población total,3268554,personas
+28,Tamaulipas,2010,Población de hombres,1616201,personas
+28,Tamaulipas,2010,Población de mujeres,1652353,personas
+28,Tamaulipas,2020,Población total,3527735,personas
+28,Tamaulipas,2020,Población de hombres,1736140,personas
+28,Tamaulipas,2020,Población de mujeres,1791595,personas
+29,Tlaxcala,2010,Población total,1169936,personas
+29,Tlaxcala,2010,Población de hombres,565775,personas
+29,Tlaxcala,2010,Población de mujeres,604161,personas
+29,Tlaxcala,2020,Población total,1342977,personas
+29,Tlaxcala,2020,Población de hombres,649894,personas
+29,Tlaxcala,2020,Población de mujeres,693083,personas
+30,Veracruz de Ignacio de la Llave,2010,Población total,7643194,personas
+30,Veracruz de Ignacio de la Llave,2010,Población de hombres,3695679,personas
+30,Veracruz de Ignacio de la Llave,2010,Población de mujeres,3947515,personas
+30,Veracruz de Ignacio de la Llave,2020,Población total,8062579,personas
+30,Veracruz de Ignacio de la Llave,2020,Población de hombres,3871774,personas
+30,Veracruz de Ignacio de la Llave,2020,Población de mujeres,4190805,personas
+31,Yucatán,2010,Población total,1955577,personas
+31,Yucatán,2010,Población de hombres,963333,personas
+31,Yucatán,2010,Población de mujeres,992244,personas
+31,Yucatán,2020,Población total,2320898,personas
+31,Yucatán,2020,Población de hombres,1140279,personas
+31,Yucatán,2020,Población de mujeres,1180619,personas
+32,Zacatecas,2010,Población total,1490668,personas
+32,Zacatecas,2010,Población de hombres,726897,personas
+32,Zacatecas,2010,Población de mujeres,763771,personas
+32,Zacatecas,2020,Población total,1622138,personas
+32,Zacatecas,2020,Población de hombres,791058,personas
+32,Zacatecas,2020,Población de mujeres,831080,personas
